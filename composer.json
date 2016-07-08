@@ -1,0 +1,20 @@
+{
+    "name": "ubeeqo/workshop-tdd",
+    "autoload": {
+            "psr-4": {
+                "Workshop\\": "src/"
+            }
+    },
+    "autoload-dev": {
+            "psr-4": {
+                "Workshop\\tests\\units\\": "tests/units"
+            }
+    },
+    "require-dev": {
+        "atoum/atoum": "dev-master@dev",
+        "atoum/autoloop-extension": "^0.1",
+        "phpunit/phpunit": "^5.4",
+        "mockery/mockery": "^0.9.5",
+        "atoum/reports-extension": "^2.3"
+    }
+}
