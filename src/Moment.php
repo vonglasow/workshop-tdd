@@ -16,6 +16,11 @@ class Moment implements DateInterface
         return $this->date;
     }
 
+    public function countNumberOfDayTo($date)
+    {
+        return (int) $this->parseDate($date)->diff($this->date)->format('%a');
+    }
+
     public function countNumberOfWeekTo($date)
     {
     }
@@ -26,5 +31,10 @@ class Moment implements DateInterface
 
     public function isBefore($date)
     {
+    }
+
+    private function parseDate($date)
+    {
+        return is_string($date) ? new \DateTime($date): $date->getDatetime();
     }
 }

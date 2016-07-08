@@ -10,4 +10,28 @@ class Moment extends Test
         $this->newTestedInstance('2016-01-02');
         $this->object($this->testedInstance)->isTestedInstance();
     }
+
+    protected function testCountNumberOfDayToDataProvider()
+    {
+        return [
+            // start, end, count
+            ['2016-01-02', '2016-01-03', 1],
+            ['2016-01-02', '2016-01-04', 2],
+            ['2016-01-02', '2016-01-05', 3],
+            ['2016-01-02', '2016-01-06', 4],
+            ['2016-01-01', '2016-01-06', 5],
+            ['2015-01-02', '2016-01-02', 365],
+            ['2016-01-01', '2016-01-01', 0],
+            // leap year
+            ['2016-01-01', '2017-01-01', 366],
+        ];
+    }
+
+    public function testCountNumberOfDayTo($start, $end, $expected)
+    {
+        $this->assert('Count number of day to date');
+        $this->newTestedInstance($start);
+        $this->integer($this->testedInstance->countNumberOfDayTo($end))
+            ->isEqualTo($expected);
+    }
 }
