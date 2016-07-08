@@ -15,6 +15,33 @@ class MomentTest extends TestCase
         $this->assertInstanceOf('Workshop\Moment', $instance);
     }
 
+    public function countNumberOfWeekProvider()
+    {
+        return [
+            // start, end, count
+            ['2016-01-01', '2016-01-02', 0],
+            ['2016-01-01', '2016-01-06', 1],
+            ['2016-01-02', '2016-01-03', 0],
+            ['2016-01-02', '2016-01-04', 0],
+            ['2016-01-02', '2016-01-05', 0],
+            ['2015-01-02', '2016-01-02', 52],
+            ['2016-01-01', '2016-01-01', 0],
+            ['2016-01-01', '2016-01-08', 1],
+            // leap year
+            ['2016-01-01', '2017-01-01', 52],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider countNumberOfWeekProvider
+     */
+    public function countNumberOfWeekTo($start, $end, $expected)
+    {
+        $instance = new \Workshop\Moment($start);
+        $this->assertEquals($expected, $instance->countNumberOfWeekTo($end));
+    }
+
     public function countNumberOfDayProvider()
     {
         return [

@@ -23,6 +23,7 @@ class Moment implements DateInterface
 
     public function countNumberOfWeekTo($date)
     {
+        return (int) round($this->countNumberOfDayTo($date) / 7, 0, PHP_ROUND_HALF_EVEN);
     }
 
     public function isAfter($date)
