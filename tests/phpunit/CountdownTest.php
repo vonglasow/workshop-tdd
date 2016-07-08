@@ -42,4 +42,23 @@ class CountdownTest extends TestCase
         $end->shouldReceive('isBefore')->andReturn(true);
         new \Workshop\Countdown($start, $end);
     }
+
+    /**
+     * @test
+     */
+    public function drawShouldReturnNumberOfCharactersEqualToNumberOfWeekComputing()
+    {
+        $start = m::mock('overload:Workshop\DateInterface');
+        $start->shouldReceive('isBefore')->andReturn(false);
+        $start->shouldReceive('countNumberOfWeekTo')->andReturn($length = 30);
+        $end = m::mock('overload:Workshop\DateInterface');
+        $end->shouldReceive('isBefore')->andReturn(false);
+
+        $instance = new \Workshop\Countdown($start, $end);
+        $this->assertEquals(
+            $length,
+            mb_strlen($instance->draw()),
+            sprintf('Should display a string length of %s char', $length)
+        );
+    }
 }

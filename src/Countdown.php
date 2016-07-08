@@ -23,9 +23,31 @@ class Countdown
 
     private function computeNumberOfCheckedBox()
     {
+        if ($this->start->isBefore('now') && $this->end->isAfter('now')) {
+            return $this->start->countNumberOfWeekTo('now');
+        }
+
+        return $this->start->countNumberOfWeekTo($this->end);
     }
 
     private function computeNumberOfTotalBox()
     {
+        return $this->start->countNumberOfWeekTo($this->end);
+    }
+
+    public function draw()
+    {
+        $i = 1;
+        $str = '';
+
+        for ($i; $i <= $this->totalOfBox; $i++)
+        {
+            $str .= ($i <= $this->nbrOfChecked) ? static::CHECKBOX_CHECKED : static::CHECKBOX_EMPTY;
+            if ($i % static::YEAR === 0) {
+                $str .= PHP_EOL;
+            }
+        }
+
+        return $str;
     }
 }
