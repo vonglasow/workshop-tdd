@@ -59,4 +59,19 @@ class Moment extends Test
         $this->integer($this->testedInstance->countNumberOfWeekTo($end))
             ->isEqualTo($expected);
     }
+
+    public function testIsAfterOrBefore()
+    {
+        $this->assert('Define if now is a date before or after the date given');
+        $this->newTestedInstance('2015-01-02');
+        $this->boolean($this->testedInstance->isAfter('now'))
+            ->isFalse();
+        $this->boolean($this->testedInstance->isBefore('now'))
+            ->isTrue();
+        $this->newTestedInstance('3015-01-02');
+        $this->boolean($this->testedInstance->isAfter('now'))
+            ->isTrue();
+        $this->boolean($this->testedInstance->isBefore('now'))
+            ->isFalse();
+    }
 }

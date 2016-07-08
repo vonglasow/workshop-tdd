@@ -15,6 +15,20 @@ class MomentTest extends TestCase
         $this->assertInstanceOf('Workshop\Moment', $instance);
     }
 
+    /**
+     * @test
+     */
+    public function defineIfNowIsAfterOrBeforeSomeDate()
+    {
+        $instance = new \Workshop\Moment('2015-01-02');
+        $this->assertFalse($instance->isAfter('now'));
+        $this->assertTrue($instance->isBefore('now'));
+
+        $instance = new \Workshop\Moment('3015-01-02');
+        $this->assertTrue($instance->isAfter('now'));
+        $this->assertFalse($instance->isBefore('now'));
+    }
+
     public function countNumberOfWeekProvider()
     {
         return [

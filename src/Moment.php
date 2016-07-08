@@ -28,10 +28,12 @@ class Moment implements DateInterface
 
     public function isAfter($date)
     {
+        return $this->date > $this->parseDate($date);
     }
 
     public function isBefore($date)
     {
+        return $this->date < $this->parseDate($date);
     }
 
     private function parseDate($date)
